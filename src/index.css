@@ -1,5 +1,37 @@
 @import "tailwindcss";
 
+@media print {
+  @page {
+    margin: 12mm 10mm;
+    size: A4;
+  }
+
+  /* Kill the viewport-height lock so page 1 starts at actual content */
+  html, body, #root {
+    height: auto !important;
+    min-height: unset !important;
+    overflow: visible !important;
+  }
+
+  /* Flatten the sticky header so it renders inline, not offset */
+  header {
+    position: static !important;
+    top: auto !important;
+  }
+
+  /* Preserve colours in PDF */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide controls that don't belong in a printed report */
+  button, input[type="range"], input[type="number"],
+  input[type="date"], select, .no-print {
+    display: none !important;
+  }
+}
+
 /* @theme {
   --font-montserrat: 'Montserrat', sans-serif;
 } */
